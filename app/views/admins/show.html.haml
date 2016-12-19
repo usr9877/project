@@ -1,0 +1,30 @@
+.row
+  .col.s12
+    .col.s6
+      %a.btn{:href=>"javascript:window.location.href='/admins/#{@admin.id}/edit'"} Засах
+      %a.btn{:href=>"javascript:window.location.href='/admins'"} Буцах
+    .col.s6{style: "text-align:right"}
+      %h5 Ажилтаны дэлгэрэнгүй мэдээлэл
+  .col.s12
+    %p#notice= notice
+    %p
+      %b Код:
+      = @admin.kod
+    %p
+      %b Нэр:
+      = @admin.firstname
+    %p
+      %b И-мэйл:
+      = @admin.lastname
+    %p
+      %b Email:
+      = @admin.email
+    %p
+      %b РД:
+      = @admin.rd
+    %p
+      %b Утас:
+      = @admin.phone
+    %p
+      %b Утас /Гэр:
+      = @admin.phone_home

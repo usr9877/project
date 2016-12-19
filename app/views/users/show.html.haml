@@ -1,0 +1,31 @@
+.row
+  .col.s12
+    .col.s6
+      %a.btn{:href=>"javascript:window.location.href='/users/#{@user.id}/edit'"} Засах
+      %a.btn{:href=>"javascript:window.location.href='/users'"} Буцах
+    .col.s6{style: "text-align:right"}
+      %h5 Хэрэглэгчийн дэлгэрэнгүй мэдээлэл
+  .col.s12
+    %p#notice= notice
+    %p
+      %b Код:
+      = @user.kod
+    %p
+      %b Нэр:
+      = @user.firstname
+    %p
+      %b И-мэйл:
+      = @user.lastname
+    %p
+      %b Email:
+      = @user.email
+    %p
+      %b РД:
+      = @user.rd
+    %p
+      %b Утас:
+      = @user.phone
+    %p
+      %b Утас /Гэр:
+      = @user.phone_home
+

@@ -1,0 +1,20 @@
+%body{:id=>"login_page"}
+	%center
+		.row
+			.framet
+				.frametc			
+					.col.s12.m6.l3.rectangle2{:style=>"margin: auto !important; display: block !important; float:none !important;"}
+						%center{:style=>"    margin-top: 10%;"}
+							%img{:src => "assets/icon.png", :class=>"logo"}
+							.flash{:style=>"padding: 35px;"}
+								-flash.each do |key, value|
+									.alert{:class=>"alert-#{key}"}=value
+								.cbb{ :style=>"margin-bottom:15px;"}
+									= form_for @admin, :url => {:action => "create"},:method => "post" do |f|
+										.row
+											.input-field.col.s12{:style=>"padding-left: 0px; padding-right: 0px;"}
+												= f.text_field :email, :class=>"validate", :placeholder=>"Kод", required: true ,:style=>"margin-bottom:0"
+										.row
+											.input-field.col.s12{:style=>"padding-left: 0px; padding-right: 0px; margin-top:0px"}
+												= f.text_field :password, :type=>"password", :class=>"validate", :placeholder=>"Нууц үг", required: true
+										= f.submit "Нэвтрэх", :class=>"waves-effect waves-light btn", :style=>"width:100%"

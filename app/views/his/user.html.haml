@@ -1,0 +1,18 @@
+%table
+  %thead
+    %tr
+      %th Код
+      %th Нэр
+      %th Овог
+      %th И-мэйл
+      %th Системд нэвтэрсэн тоо
+      %th Хамгийн сүүлд орсон огноо
+  %tbody
+    - @data.each do |i|
+      %tr
+        %td= i.kod
+        %td= i.firstname
+        %td= i.lastname
+        %td= i.email
+        %td= UserRepeatLogin.where(user_Id: i.id).count
+        %td= UserRepeatLogin.where(user_Id: i.id).last.created_at

@@ -1,0 +1,82 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%title Library
+		%link{:href => "/assets/icon.png/", :rel => "shortcut icon"}/
+		= stylesheet_link_tag "application", params[:controller], :media => "all", 'data-turbolinks-track' => true
+		= javascript_include_tag "application", params[:controller], 'data-turbolinks-track' => true
+		= csrf_meta_tags
+	%body
+		-if current_user
+			%nav
+				.nav-wrapper
+					%a.brand-logo.right{:href => "#!",style:"top:0px"} Library
+					%a.button-collapse{"data-activates" => "slide-out", :href => "#"}
+						%i.material-icons menu
+			%ul#slide-out.side-nav.fixed
+				%li
+					.userView
+						.background
+							%img{:src => "/assets/book.jpg"}/
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%img.circle{:src => "/assets/icon.png"}/
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%span.white-text.name #{current_user.firstname} #{current_user.lastname}
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%span.white-text.email #{current_user.email}
+				%li
+					%a{:href=>"javascript:window.location.href='/admins'"}
+						%i.material-icons> cloud
+						Нүүр хуудас
+				
+				-Usermenu.where(s:1).all.each do |menu|
+					-if menu.l.to_s == @m.to_s
+						%li.active
+							%a{:href=>"javascript:window.location.href='#{menu.l}'"}=menu.v
+					-else
+						%li
+							%a{:href=>"javascript:window.location.href='#{menu.l}'"}=menu.v
+				
+				%li
+					%a{:href=>"javascript:window.location.href='/login'"}
+			%main
+				.flash
+					-flash.each do |key, value|
+						.alert{:class=>"alert-#{key}"}=value
+				= yield
+		-elsif system_user
+			%nav
+				.nav-wrapper
+					%a.brand-logo.right{:href => "#!",style:"top:0px"} Library
+					%a.button-collapse{"data-activates" => "slide-out", :href => "#"}
+						%i.material-icons menu
+			%ul#slide-out.side-nav.fixed
+				%li
+					.userView
+						.background
+							%img{:src => "/assets/book1.jpeg"}/
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%img.circle{:src => "/assets/icon.png"}/
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%span.white-text.name #{system_user.firstname} #{system_user.lastname}
+						%a{:href=>"javascript:window.location.href='/admins'"}
+							%span.white-text.email #{system_user.email}
+				%li
+					%a{:href=>"javascript:window.location.href='/books'"} Номын жагсаалт
+				%li
+					.divider
+				%li
+					%a{:href=>"javascript:window.location.href='/usage'"} Зээлэгдсэн номын мэдээлэл
+		
+				%li
+					.divider
+				%li
+					%a{:href=>"javascript:window.location.href='/sign_in'"} Гарах
+			%main
+				.flash
+					-flash.each do |key, value|
+						.alert{:class=>"alert-#{key}"}=value
+				= yield
+		-else
+			=yield

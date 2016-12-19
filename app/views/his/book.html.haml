@@ -1,0 +1,21 @@
+%table
+  %thead
+    %tr
+      %th Код
+      %th Нэр
+      %th DDC
+      %th ISBN
+      %th Зохиогч
+      %th Захиалсан тоо
+      %th Хамгийн сүүлд Захиалсан огноо
+  %tbody
+    - @data.each do |book|
+      %tr
+        %td= book.kod
+        %td= book.name
+        %td= book.ddc
+        
+        %td= book.isbn
+        %td= book.writer
+        %td= Bookrent.where(book_id: book.id).count
+        %td= Bookrent.where(book_id: book.id).last.created_at

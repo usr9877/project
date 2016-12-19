@@ -1,0 +1,31 @@
+= form_for @user do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :Код
+    = f.number_field :kod, disabled: "disabled"
+  .field
+    = f.label :Нэр
+    = f.text_field :firstname
+  .field
+    = f.label :Овог
+    = f.text_field :lastname
+  .field
+    = f.label "И-мэйл"
+    = f.text_field :email
+  .field
+    = f.label :РД
+    = f.text_field :rd
+  .field
+    = f.label :Утас
+    = f.text_field :phone
+  .field
+    = f.label "Утас /Гэр"
+    = f.text_field :phone_home
+  .actions
+    = f.submit 'Хадгалах',class: "btn"

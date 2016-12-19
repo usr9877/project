@@ -1,0 +1,52 @@
+.fixed-action-btn.horizontal.modal-trigger{:href => "#add_data",:style=>"color:#767676; "}
+  %a.btn-floating.btn-large.green
+    %i.material-icons add
+
+.modal.small_modal{:id=>"add_data"}
+  .modal-content
+    %i.material-icons.modal-close close
+    .header
+      %h5 Админ бүртгэх
+    .content.container
+      = form_for @admin, :url => {:action => "create"}, :method => "post" do |f|
+        %p= f.hidden_field   :kod,value:@last_cod
+        %p= f.text_field     :email,:placeholder =>"E-mail"
+        %p= f.text_field     :firstname,:placeholder=>"Нэр"
+        %p= f.text_field     :lastname,:placeholder =>"Овог"
+        %p= f.text_field     :rd,:placeholder =>"РД"
+        %p= f.text_field     :phone,:placeholder =>"Утас"
+        %p= f.text_field     :phone_home,:placeholder =>"Гэрийн утас"
+        %p= f.password_field :password,:placeholder =>"Нууц үг"
+        %p= f.password_field :password_confirmation,:placeholder=>"Нууц үг давтах"
+        %center.col.s12
+          = f.submit "Хадгалъя",:class=>"btn"
+
+.col-xs-3.col-sm-3.col-md-3
+  = form_tag 'admins', method: :get do
+    = text_field_tag :search, params[:search] , :value => 'хaйх ...', :onfocus => 'this.value = ""' ,:style=>"background-image: url('/assets/ic_search.png'); background-repeat: no-repeat;     background-size: 40px 30px; background-position: right;     border: 1px solid #e1e6ea; color: #c7cfd5; font-size:13px; font-family: 'Open Sans', sans-serif; width:100%; padding-left:20px "
+
+%table
+  %thead
+    %tr
+      %th Код
+      %th Нэр
+      %th Овог
+      %th И-мэйл
+      %th РД
+      %th Утас
+      %th{colspan:3}
+
+  %tbody
+    - @admins.each do |admin|
+      %tr
+        %td= admin.kod
+        %td= admin.firstname
+        %td= admin.lastname
+        %td= admin.email
+        %td= admin.rd
+        %td= admin.phone
+        %td= link_to 'Дэлгэрэнгүй харах', admin
+        %td= link_to 'Засах', edit_admin_path(admin)
+        %td= link_to 'Устгах', admin, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+

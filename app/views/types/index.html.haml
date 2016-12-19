@@ -1,0 +1,40 @@
+.fixed-action-btn.horizontal.modal-trigger{:href => "#add_data",:style=>"color:#767676; "}
+  %a.btn-floating.btn-large.green
+    %i.material-icons add
+
+.modal.small_modal{:id=>"add_data"}
+  .modal-content
+    %i.material-icons.modal-close close
+    .header
+      %h5 Админ бүртгэх
+    .content.container
+      = form_for @type, :url => {:action => "create"}, :method => "post" do |f|
+        %p= f.text_field :title
+        %center.col.s12
+          = f.submit "Хадгалъя",:class=>"btn"
+
+%table
+  %thead
+    %tr
+      %th Утга
+      %th{colspan:2}
+
+  %tbody
+    - @types.each do |type|
+      .modal.small_modal{:id=>"ss#{type.id}"}
+        .modal-content
+          %i.material-icons.modal-close close
+          .header
+            %h5 Админ бүртгэх
+          .content.container
+            = form_for @type, :url => {controller: "types",action: "update"}, :method => "post" do |f|
+              = f.hidden_field :id,:value=>type.id
+              %p= f.text_field :title,:value=>type.title
+              %center.col.s12
+                = f.submit "Хадгалъя",:class=>"btn"
+      %tr
+        %td= type.title
+        %td
+          %a.modal-trigger{:href => "#ss#{type.id}",:style=>"color:#767676; "} Засах
+
+        %td= link_to 'Устгах', type, :method => :delete, :data => { :confirm => 'Are you sure?' }

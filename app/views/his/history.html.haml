@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %th Нэр
+      %th Зээллэгийн түүх
+      %th Буцаан өгсөн
+      %th Зээлсэн байгаа
+      %th Хүсэлт явуулан
+      %th Хүсэлт тодорхойгүй
+  %tbody
+    - @bookrents.each do |i|
+      %tr
+        -@user = User.find(i.user_Id)
+        %td 
+          %a{:href=>"javascript:window.location.href='/his/history_book?user_id=#{i.user_Id}'"} #{@user.firstname} #{@user.lastname}
+        %td= Bookrent.where(user_Id: i.user_Id).count
+        %td= Bookrent.where(user_Id: i.user_Id,status:3).count
+        %td= Bookrent.where(user_Id: i.user_Id,status:2).count
+        %td= Bookrent.where(user_Id: i.user_Id,status:1).count
+        %td= Bookrent.where(user_Id: i.user_Id,status:0).count

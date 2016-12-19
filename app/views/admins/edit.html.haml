@@ -1,0 +1,11 @@
+.row
+	.col.s12
+		.col.s6
+			%a.btn{:href=>"javascript:window.location.href='/admins/#{@admin.id}'"} Харах
+			%a.btn{:href=>"javascript:window.location.href='/admins'"} Буцах
+		.col.s6{style: "text-align:right"}
+			%h5 Ажилтаны мэдээлэл засах
+		
+	.col.s12
+		= render 'form'
+

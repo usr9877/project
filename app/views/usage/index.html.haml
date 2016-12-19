@@ -1,0 +1,22 @@
+%table
+  %thead
+    %tr
+      %th Код
+      %th Нэр
+      %th DDC
+      %th ISBN
+      %th Эхлэх огноо
+      %th Дуусах огноо
+      %th
+  %tbody
+    - @bookrents.each do |i|
+      %tr
+        %td= i.book.kod
+        %td= i.book.name
+        %td= i.book.ddc
+        %td= i.book.isbn
+     
+
+        %td=i.begin_date
+        %td=i.end_date
+        %td #{(i.status == 1) ? "хүсэлт илгээгдсэн" : (i.status == 2) ? "Зээллэгдпсэн" : "" }

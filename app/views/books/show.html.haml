@@ -1,0 +1,30 @@
+.row
+  .col.s12
+    .col.s6
+      %a.btn{:href=>"javascript:window.location.href='/books/#{@book.id}/edit'"} Засах
+      %a.btn{:href=>"javascript:window.location.href='/books'"} Буцах
+    .col.s6{style: "text-align:right"}
+      %h5 Номын дэлгэрэнгүй мэдээлэл
+  .col.s12
+    %p#notice= notice
+    %p
+      %b Код:
+      = @book.kod
+    %p
+      %b Нэр:
+      = @book.name
+    %p
+      %b DDC:
+      = @book.ddc
+    %p
+      %b ISBN:
+      = @book.isbn
+    %p
+      %b Зохиогч:
+      = @book.writer
+    %p
+      %b Зохиогдсон он:
+      = @book.write_date
+    %p
+      %b Төрөл:
+      = @book.type.title

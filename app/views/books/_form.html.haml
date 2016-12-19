@@ -1,0 +1,35 @@
+= form_for @book do |f|
+  - if @book.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@book.errors.count, "error")} prohibited this book from being saved:"
+      %ul
+        - @book.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :Код
+    = f.number_field :kod
+  .field
+    = f.label :Нэр
+    = f.text_field :name
+  .field
+    = f.label :DDC
+    = f.text_field :ddc
+  .field
+    = f.label "Тоо ширхэг"
+    = f.number_field :count
+  .field
+    = f.label :ISBN
+    = f.text_field :isbn
+  .field
+    = f.label :Зохиогч
+    = f.text_field :writer
+  .field
+    = f.label "Зохиогдсон он"
+    = f.date_select :write_date
+  .field
+    = f.label :Төрөл
+    = f.select :type_id, options_for_select(@types.collect { |obj|   |
+          [obj.title.titleize,      obj.id]}, 0), {}, {style: "display: inherit;"} |
+  .actions
+    = f.submit 'Хадгалах',class: "btn"
