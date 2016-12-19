@@ -22,3 +22,8 @@
             =o.hidden_field :id, value: i.id
             =o.select :status, options_for_select(@types.collect { |p|   |
                [p[:value],      p[:id]]}, i.status), {}, {onchange: "this.form.submit()" } |
+
+%br
+%br
+%br
+=paginate @bookrents

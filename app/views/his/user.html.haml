@@ -16,3 +16,8 @@
         %td= i.email
         %td= UserRepeatLogin.where(user_Id: i.id).count
         %td= UserRepeatLogin.where(user_Id: i.id).last.created_at
+
+%br
+%br
+%br
+=paginate @data

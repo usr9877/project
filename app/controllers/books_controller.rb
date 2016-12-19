@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @m = "/books" 
-    @books    = (params[:search].blank?) ? (params[:type].blank?) ? Book.all : Book.where(:type_id=> params[:type]) :  (params[:type].blank?) ? Book.all.params[:search] : Book.where(:type_id=> params[:type]).params[:search] 
+    @books    = (params[:search].blank?) ? (params[:type].blank?) ? Book.all.page(params[:page]).per(20)  : Book.where(:type_id=> params[:type]).page(params[:page]).per(20)  :  (params[:type].blank?) ? Book.all.params[:search].page(params[:page]).per(20)  : Book.where(:type_id=> params[:type]).params[:search].page(params[:page]).per(20) 
     @types    = Type.all
     @book     = Book.new
     @bookrent = Bookrent.new

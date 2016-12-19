@@ -3,26 +3,26 @@ class HisController < ApplicationController
   def user
     @m = "/his/user"
     @ids  = UserRepeatLogin.pluck(:user_id)
-    @data = User.where(id: @ids)
+    @data = User.where(id: @ids).page(params[:page]).per(20)
   end
   
   def book
     @m = "/his/book"
     @ids  = Bookrent.all.pluck(:book_id)
-    @data = Book.where(id: @ids)
+    @data = Book.where(id: @ids).page(params[:page]).per(20)
   end
   
   def history
     @m = "/his/history"
-    @bookrents =(params[:page].blank?) ?  Bookrent.all.order("created_at DESC") : Bookrent.all.order("created_at DESC").page(params[:page]).per(20)
+    @bookrents = Bookrent.all.order("created_at DESC").page(params[:page]).per(20)
   end
 
   def history_book
     @m = "/his/history_book"
   	if params[:user_id].to_i>0
-  	 	@bookrents = (params[:page].blank?) ? Bookrent.where(user_Id: params[:user_id].to_i).order("created_at DESC")  : Bookrent.where(user_Id: params[:user_id].to_i).order("created_at DESC").page(params[:page]).per(20)
+  	 	@bookrents = Bookrent.where(user_Id: params[:user_id].to_i).order("created_at DESC").page(params[:page]).per(20)
   	 else
-  	 		@bookrents = (params[:page].blank?) ? Bookrent.all.order("created_at DESC") : Bookrent.all.order("created_at DESC").page(params[:page]).per(20)
+  	 		@bookrents =  Bookrent.all.order("created_at DESC").page(params[:page]).per(20)
   	end
   	@types= Array.new
 
@@ -33,7 +33,7 @@ class HisController < ApplicationController
   end
 
   def change_type
-    Bookrent.find(params[:trip][:id]).update(status:params[:trip][:status])  
+    Bookrent.find(params[:trip][:id]).update(status:params[:trip][:status]).page(params[:page]).per(20)
     redirect_to URI.escape("/his/history_book")
   end
   

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @m = "/users"
-    @users    = (params[:search].blank?) ? User.all : User.all.params[:search]
+    @users    = (params[:search].blank?) ? User.all.page(params[:page]).per(20) : User.all.params[:search].page(params[:page]).per(20)
     @user     = User.new
     @last_cod = (User.all.blank?) ? 100000 : User.all.order("kod").last.kod.to_i+1
   end
@@ -30,9 +30,7 @@ class UsersController < ApplicationController
 
   def create
     @obj = User.new(user_params)
-    if !@obj.save
-      @obj = User.all.page(params[:page]).per(20)
-    end
+    @obj.save
     redirect_to URI.escape("/users")
   end
 

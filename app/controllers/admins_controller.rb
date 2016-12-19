@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
   
   def index
     @m = "/admins" 
-    @admins = (params[:search].blank?) ?  Admin.all : Admin.all.page(params[:page]).search(params[:search])
+    @admins = (params[:search].blank?) ?  Admin.all.page(params[:page]).per(20) : Admin.all.page(params[:page]).per(20).search(params[:search])
     @admin  = Admin.new
     @last_cod = (Admin.all.blank?) ? 10 : Admin.all.order("kod").last.kod.to_i+1
   end

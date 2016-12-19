@@ -1,7 +1,8 @@
 -if current_user
-  .fixed-action-btn.horizontal.modal-trigger{:href => "#add_data",:style=>"color:#767676; "}
-    %a.btn-floating.btn-large.green
+  %a.fixed-action-btn.horizontal.modal{:href => "#add_data",style:"background:transparent"}
+    .btn-floating.btn-large
       %i.material-icons add
+
 
   .modal.small_modal{:id=>"add_data"}
     .modal-content
@@ -23,8 +24,8 @@
           %center.col.s12
             = f.submit "Хадгалъя",:class=>"btn"
 -if system_user
-  .fixed-action-btn.horizontal.modal-trigger{:href => "#add_data",:style=>"color:#767676; "}
-    %a.btn-floating.btn-large.green
+  %a.fixed-action-btn.horizontal.modal{:href => "#add_data",style:"background:transparent"}
+    .btn-floating.btn-large
       %i.material-icons add
 
   .modal.small_modal{:id=>"add_data"}
@@ -45,13 +46,14 @@
           %center.col.s12
             = f.submit "Хадгалъя",:class=>"btn"
 .row
-  .col.s6
+  .col.s4
     = form_tag 'books', method: :get do
       = text_field_tag :search, params[:search] , :value => 'хaйх ...', :onfocus => 'this.value = ""' ,:style=>"background-image: url('/assets/ic_search.png'); background-repeat: no-repeat;     background-size: 40px 30px; background-position: right;     border: 1px solid #e1e6ea; color: #c7cfd5; font-size:13px; font-family: 'Open Sans', sans-serif; width:100%; padding-left:20px "
-  .col.s6
+  .col.s4
+  .col.s4
     =form_for :trip, :url=>{action:"change_type"}, :method=>'post' do |o| 
       =o.select :id, options_for_select(Type.all.collect { |p|   |
-         [p[:title],      p[:id]]}, params[:type].to_i), {style: "display: inline;"}, {style: "display: inline;",onchange: "this.form.submit()" } |
+         [p[:title],      p[:id]]}, params[:type].to_i), {}, {onchange: "this.form.submit()" } |
 %table
   %thead
     %tr
@@ -82,3 +84,8 @@
           %td= link_to 'Дэлгэрэнгүй', book
           %td= link_to 'Засах', edit_book_path(book)
           %td= link_to 'Устгах', book, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+%br
+%br
+=paginate @books

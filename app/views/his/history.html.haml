@@ -18,3 +18,8 @@
         %td= Bookrent.where(user_Id: i.user_Id,status:2).count
         %td= Bookrent.where(user_Id: i.user_Id,status:1).count
         %td= Bookrent.where(user_Id: i.user_Id,status:0).count
+
+%br
+%br
+%br
+=paginate @bookrents

@@ -19,3 +19,8 @@
         %td= book.writer
         %td= Bookrent.where(book_id: book.id).count
         %td= Bookrent.where(book_id: book.id).last.created_at
+
+%br
+%br
+%br
+=paginate @data
